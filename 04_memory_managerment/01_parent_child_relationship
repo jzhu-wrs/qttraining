@@ -1,0 +1,14 @@
+ - Each QObject instance may take a parent argument.
+ - Child informs its parent about its existence
+ - The parent does the following for its children
+   - Deletes them, when it is self deleted
+   - Hides and shows children, when hidden/shown itself
+   - Enables and disables children when enabled or disabled itself
+
+
+ = Objects inheriting from QObject are allocated on the heap using new.
+   eg. QLabel *label = new QLabel("Some Text!", parent);
+ = Objects not inheriting from QObject are allocated on the stack, not the heap
+   eg. QStringList list; QColor color
+ = Exceptions.
+    QFile/QApplication are usually allocated on the stack

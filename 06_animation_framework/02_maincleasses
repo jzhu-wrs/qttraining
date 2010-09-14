@@ -1,0 +1,6 @@
+QAbstractAnimation
+├── QAnimationGroup
+│   ├── QParalleAnimationGroup    * 
+│   └── QSequentialAnimationGroup *
+└── QVariantAnimation
+    └── QPropertyAnimation        *

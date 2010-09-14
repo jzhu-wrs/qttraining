@@ -1,0 +1,17 @@
+QGraphicsScene
+ - Providing a fast interface for managing a large number of items
+ - Propagating events to each item
+ - Managing item state, such as selection and focus handling
+ - Providing untransformed rendering functionality; mainly for printing
+
+QGraphicsItem
+ - QGraphicsItem is the base class for graphical items in a scene. 
+ - Mouse press, move, release and double click events, as well as mouse hover events, wheel events, and context menu events.
+ - Keyboard input focus, and key events
+ - Drag and drop
+ - Grouping, both through parent-child relationships, and with QGraphicsItemGroup
+ - Collision detection
+
+QGraphicsView
+ - QGraphicsView provides the view widget, which visualizes the contents of a scene. 
+ - You can attach several views to the same scene, to provide several viewports into the same data set.

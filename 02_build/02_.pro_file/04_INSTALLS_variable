@@ -1,0 +1,9 @@
+install extra files 
+eg.
+desktop_entry.files = qtstyleexample.desktop qtstyleexample-windows-style.desktop
+desktop_entry.path = $$M_INSTALL_DATA/applications
+
+services.files = $$OUT_PWD/$${myname}.service
+services.path = $$M_DBUS_SERVICES_DIR
+
+INSTALLS += desktop_entry services

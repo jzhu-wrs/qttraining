@@ -1,0 +1,31 @@
+==============
+Questions ?
+ - which property to be animationed ?
+ - how long the animation will stay ?
+ - initial state 
+ - end state
+
+Answers !
+    QPushButton button("Animated Button");
+    button.show();
+
+a1.    QPropertyAnimation animation(&button, "geometry");
+a2.    animation.setDuration(10000);
+a3.    animation.setStartValue(QRect(0, 0, 100, 30));
+a4.    animation.setEndValue(QRect(250, 250, 100, 30));
+
+    animation.start();
+
+================
+Further question
+ - intermediate states ?
+a.    setKeyValueAt(different point between 0 to 1) 
+      eg.
+      animation.setKeyValueAt(0, QRect(0, 0, 100, 30));
+      animation.setKeyValueAt(0.8, QRect(250, 250, 100, 30));
+      animation.setKeyValueAt(1, QRect(0, 0, 100, 30));
+
+ - animation effects ?
+a.    QPropertyAnimation::setEasingCurve (const QEasingCurve & easing) 
+url:http://apidocs.meego.com/qt4.6/qeasingcurve.html
+

@@ -1,0 +1,3 @@
+add some features to project
+eg. CONFIG += debug 
+    CONFIG += meegotouch

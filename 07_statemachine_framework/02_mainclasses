@@ -1,0 +1,11 @@
+State Machine elements
+ - state chine (top level)
+ - states
+ - transiton (trigger state_a to state_b)
+ - animation on transition
+
+
+QStateMachine 
+QSignalTransition   
+QState
+void QSignalTransition::addAnimation ( QAbstractAnimation * animation )

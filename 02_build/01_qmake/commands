@@ -1,0 +1,3 @@
+(qmake -project)    # create a .pro file
+qmake		    # create Makefile for .pro file
+make		    # build the project	

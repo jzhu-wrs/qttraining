@@ -1,0 +1,2 @@
+add Qt modules to be built
+eg. QT += network

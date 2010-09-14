@@ -1,0 +1,14 @@
+simple code.
+ QPropertyAnimation anim1(...);
+ ...anim1 setting...
+
+ QPropertyAnimation anim2(...);
+ ...anim2 setting...
+
+ QSequentialAnimationGroup group;
+ //QParallelAnimationGroup group
+
+ group.addAnimation(&anim1);
+ group.addAnimation(&anim2);
+
+ group.start();
