@@ -1,0 +1,13 @@
+QOrganizerItemManager 
+QOrganizerItem
+
+QOrganizerItemManager *m_manager;
+QList<QOrganizerItem> items = importer.items();
+QMap<int, QOrganizerItemManager::Error> errorMap;
+QList<QOrganizerItem>::iterator it = items.begin();
+while (it != items.end()) {
+    *it = m_manager->compatibleItem(*it);
+    it++;
+}
+m_manager->saveItems(&items, QOrganizerCollectionLocalId(), &errorMap);
+

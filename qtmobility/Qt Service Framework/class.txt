@@ -1,0 +1,23 @@
+QServiceManager
+QServiceFilter
+
+QServicePluginInterface
+
+QServiceManager manager;
+QServiceFilter filter("com.nokia.qt.examples.FileStorage");
+filter.setServiceName("FileStorage");
+
+// find services complying with filter
+QList<QServiceInterfaceDescriptor> foundServices;
+foundServices = manager.findInterfaces(filter);
+Q_ASSERT(foundServices.count());
+
+// instantiate the FileStorage object
+QObject *fileStorage;
+fileStorage = manager.loadInterface(foundServices.at(0));
+
+storage = manager.loadInterface("com.nokia.qt.examples.FileStorage");
+if (storage)
+     QMetaObject::invokeMethod(storage, "deleteFile", Q_ARG(QString, "/tmp/readme.txt"));
+
+

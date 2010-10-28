@@ -1,0 +1,32 @@
+QCamera
+QCameraImageCapture
+
+//still image
+camera = new QCamera;
+viewFinder = new QCameraViewfinder();
+viewFinder->show();
+
+camera->setViewfinder(viewFinder);
+imageCapture = new QCameraImageCapture(camera);
+camera->setCaptureMode(QCamera::CaptureStillImage);
+camera->start();
+//on half pressed shutter button
+camera->searchAndLock();
+...
+//on shutter button pressed
+imageCapture->capture();
+//on shutter button released
+camera->unlock();
+
+
+
+
+//video clip
+camera = new QCamera;
+mediaRecorder = new QMediaRecorder(camera);
+
+camera->setCaptureMode(QCamera::CaptureVideo);
+camera->start();
+
+//on shutter button pressed
+mediaRecorder->record();

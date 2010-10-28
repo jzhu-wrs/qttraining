@@ -1,0 +1,23 @@
+QContactManager
+QContactLocalId
+QContact
+
+
+QStringList availableManagers = QContactManager::availableManagers();
+
+connect(m_manager, SIGNAL(contactsAdded(const QList<QContactLocalId>&)),
+	this, SLOT(contactsAdded(const QList<QContactLocalId>&)));
+connect(m_manager, SIGNAL(contactsRemoved(const QList<QContactLocalId>&)),
+	this, SLOT(contactsRemoved(const QList<QContactLocalId>&)));
+connect(m_manager, SIGNAL(contactsChanged(const QList<QContactLocalId>&)),
+	this, SLOT(contactsChanged(const QList<QContactLocalId>&)));
+
+
+QContactIntersectionFilter qcif;
+QContactLocalIdFilter qclif;
+qclif.setIds(ids);
+qcif.append(qclif);
+qcif.append(m_currentFilter);
+m_contacts = m_manager->contacts(qcif);
+
+bool success = m_manager->saveContact(&curr);

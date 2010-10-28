@@ -1,0 +1,27 @@
+QVersitDocument
+QVersitReader
+QVersitWriter
+QVersitContactImporter
+QVersitContactExporter
+QVersitOrganizerImporter
+QVersitOrganizerExporter
+
+
+QVersitContactImporter importer;
+if (!importer.importDocuments(inputDocuments))
+{
+    return;
+}
+QList<QContact> contacts = importer.contacts();
+// Note that the QContacts are not saved yet.
+
+
+
+// Note: we could also use the more convenient QVersitWriter(QByteArray*) constructor.
+QBuffer output;
+output.open(QBuffer::ReadWrite);
+QVersitWriter writer;
+writer.setDevice(&output);
+writer.startWriting(outputDocuments); // Remember to check the return value
+writer.waitForFinished();
+// output.buffer() now contains a vCard

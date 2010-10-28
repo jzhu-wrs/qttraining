@@ -1,0 +1,23 @@
+QDocumentGallery
+
+QGalleryAbstractRequest
+QGalleryItemRequest
+QGalleryQueryRequest
+QGalleryRemoveRequest
+QGalleryTypeRequest
+QGalleryResultSet
+
+QGalleryFilter
+QGalleryIntersectionFilter
+QGalleryMetaDataFilter
+QGalleryUnionFilter
+
+
+QGalleryResultSet *resultSet;
+request = new QGalleryQueryRequest(gallery, this);
+request->setFilter(QDocumentGallery::filePath == file.absoluteFilePath());
+//other request setings
+request->execute();
+resultSet = request->resultSet();
+
+

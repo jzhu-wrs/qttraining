@@ -1,0 +1,15 @@
+QNetworkConfigurationManager
+QNetworkConfiguration
+QNetworkSession
+
+
+
+QNetworkConfigurationManager manager;
+connect(&manager, SIGNAL(configurationAdded(QNetworkConfiguration)), 
+    this, SLOT(configurationAdded(QNetworkConfiguration)));
+connect(&manager, SIGNAL(configurationRemoved(QNetworkConfiguration)), 
+    this, SLOT(configurationRemoved(QNetworkConfiguration)));
+connect(&manager, SIGNAL(configurationChanged(QNetworkConfiguration)), 
+    this, SLOT(configurationChanged(QNetworkConfiguration)));
+
+QNetworkSession ( const QNetworkConfiguration & connectionConfig, QObject * parent = 0);

@@ -1,0 +1,16 @@
+QMediaPlayer
+QMediaPlaylist
+QVideoWidget
+
+
+player = new QMediaPlayer;
+
+playlist = new QMediaPlaylist(player);
+playlist->append(QUrl("http://example.com/myclip1.mp4"));
+playlist->append(QUrl("http://example.com/myclip2.mp4"));
+...
+widget = new QVideoWidget(player);
+widget->show();
+
+playlist->setCurrentPosition(1);
+player->play();

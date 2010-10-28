@@ -1,0 +1,7 @@
+QTelephonyCallInfo
+QTelephonyCallList
+
+Signals
+void	activeCallAdded ( const QTelephonyCallInfo & call )
+void	activeCallRemoved ( const QTelephonyCallInfo & call )
+void	activeCallStatusChanged ( const QTelephonyCallInfo & call )

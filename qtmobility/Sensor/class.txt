@@ -1,0 +1,44 @@
+QAccelerometer 
+QAmbientLightSensor 
+QCompass 
+QMagnetometer 
+QOrientationSensor 
+QProximitySensor 
+QRotationSensor 
+QTapSensor
+
+QAccelerometerReading
+QAmbientLightReading
+QCompassReading
+QMagnetometerReading
+QOrientationReading
+QProximityReading
+QRotationReading
+QTapReading
+
+QTM_NAMESPACE::QAmbientLightSensor m_ambientLightSensor;
+m_ambientLightSensor.connectToBackend();
+m_ambientLightSensor.start();
+connect(&m_ambientLightSensor, SIGNAL(readingChanged()), this, SLOT(handleALS()));
+
+
+
+
+QAccelerometerFilter
+QAmbientLightFilter
+QCompassFilter
+QMagnetometerFilter
+QOrientationFilter
+QProximityFilter
+QRotationFilter
+QTapFilter
+
+QMagnetometer rawsensor;
+if (rate_val > 0) {
+    rawsensor.setDataRate(rate_val);
+}
+MagRawFilter rawfilter;
+rawsensor.addFilter(&rawfilter);
+qDebug() << rawsensor.availableDataRates().size();
+rawsensor.start();
+

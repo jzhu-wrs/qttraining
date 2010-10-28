@@ -1,0 +1,16 @@
+QFeedbackEffect
+QFeedbackFileEffect
+QFeedbackHapticsEffect
+
+QFeedbackEffect::playThemeEffect(QFeedbackEffect::ThemeBasicButton);
+
+QFeedbackHapticsEffect rumble;
+rumble.setAttackIntensity(0.0);
+rumble.setAttackTime(250);
+rumble.setIntensity(1.0);
+rumble.setDuration(100);
+rumble.setFadeTime(250);
+rumble.setFadeIntensity(0.0);
+//rumble.start();
+//rumble.pause();
+//rumble.stop();

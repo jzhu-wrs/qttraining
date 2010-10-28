@@ -1,0 +1,11 @@
+QValueSpacePublisher 
+
+
+publisher = new QValueSpacePublisher(QValueSpace::WritableLayer,path);
+publisher->setValue("intValue", value);
+publisher->resetValue("intValue");
+
+
+subscriber = new QValueSpaceSubscriber(ui->basePath->text(), this);
+connect(subscriber, SIGNAL(contentsChanged()), this, SLOT(subscriberChanged()));
+

@@ -1,0 +1,27 @@
+QAudioCapture
+QMediaRecorder
+
+audiosource = new QAudioCaptureSource;
+capture = new QMediaRecorder(audiosource);
+capture->setOutputLocation(QUrl("test.raw"));
+audiosource->setSelectedDevice(i);
+// ...
+capture->setAudioCodec(codecIdx);
+capture->record();
+capture->stop();
+
+QMediaPlayer
+QMediaPlaylist
+QMediaPlayer *player = new QMediaPlayer;
+...
+player->setMedia(QUrl::fromLocalFile("test.raw"));
+player->setVolume(50);
+player->play();
+
+player = new QMediaPlayer;
+playlist = new QMediaPlaylist(player);
+playlist->append(QUrl("http://example.com/myfile1.mp3"));
+playlist->append(QUrl("http://example.com/myfile2.mp3"));
+...
+playlist->setCurrentPosition(1);
+player->play();

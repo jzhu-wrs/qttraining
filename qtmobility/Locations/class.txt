@@ -1,0 +1,21 @@
+QGeoPositionInfoSource
+QGeoPositionInfo
+
+
+QGeoPositionInfoSource *source = QGeoPositionInfoSource::createDefaultSource(this);
+if (source) {
+    connect(source, SIGNAL(positionUpdated(QGeoPositionInfo)),
+	    this, SLOT(positionUpdated(QGeoPositionInfo)));
+    source->startUpdates();
+}
+
+void QGeoPositionInfoSource::setPreferredPositioningMethods ( PositioningMethods methods )
+QGeoPositionInfoSource::SatellitePositioningMethods 
+QGeoPositionInfoSource::NonSatellitePositioningMethods	
+QGeoPositionInfoSource::AllPositioningMethods
+
+
+QGeoMappingManager
+QGeoRoutingManager 
+QGeoSearchManager
+

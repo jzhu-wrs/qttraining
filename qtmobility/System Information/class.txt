@@ -1,0 +1,6 @@
+QSystemDeviceInfo
+QSystemDisplayInfo
+QSystemInfo
+QSystemNetworkInfo
+QSystemScreenSaver
+QSystemStorageInfo

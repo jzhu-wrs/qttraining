@@ -1,0 +1,8 @@
+QMessage
+QMessageService
+QMessageManager //manager account,filter,folders
+
+QMessageService service;
+QMessage message;
+message.setxxx(...)
+service.send(message);
