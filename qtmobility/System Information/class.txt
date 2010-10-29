@@ -4,3 +4,10 @@ QSystemInfo
 QSystemNetworkInfo
 QSystemScreenSaver
 QSystemStorageInfo
+
+di = new QSystemDeviceInfo(this); 
+batteryLevelBar->setValue(di->batteryLevel());
+
+connect(di,SIGNAL(batteryLevelChanged(int)),
+	this,SLOT(updateBatteryStatus(int)));
+
