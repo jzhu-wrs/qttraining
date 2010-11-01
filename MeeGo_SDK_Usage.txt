@@ -1,0 +1,72 @@
+1. Prepare MeeGo tools in host linux
+    * add meego tools repo to host repo file(http://repo.meego.com/MeeGo/tools/repos)
+	** Ubuntu: /etc/apt/sources.list 
+	-- root@zhu-wrs:~# echo "deb http://repo.meego.com/MeeGo/tools/repos/ubuntu/10.04 /" >> /etc/apt/sources.list
+    * install meego tools
+	** Ubuntu: package name mic2 
+	-- zhu@zhu-wrs:~$ sudo apt-get update
+	-- zhu@zhu-wrs:~$ sudo apt-get install mic2
+
+2. Unzip SDK, Mount loop image to directory 	
+    * unzip the SDK
+    -- zhu@zhu-wrs:~$ cd work  #if "work" directory not exist, create it with "mkdir work"
+    -- zhu@zhu-wrs:~/work$ tar xjf /home/zhu/downloads/e-MIP-handset_DEVEL-20101013.tar.bz2
+    -- zhu@zhu-wrs:~/work$ sudo mount -o loop e-MIP-handset-DEVEL-20101013/e-MIP-handset-DEVEL-1.0.90.20101013.1541.img tmp
+
+3. Copy the mounted system to new directory
+    -- zhu@zhu-wrs:~/work$ mkdir rootfs
+    -- zhu@zhu-wrs:~/work$ sudo cp -raf tmp rootfs
+    -- zhu@zhu-wrs:~/work$ sudo umount tmp 
+
+====================================you need go through step 1,2,3 once==========================================
+====================================your usual work will be CHROOT env==========================================
+
+4. Go into chroot environment
+    -- zhu@zhu-wrs:~/work$ sudo mic-chroot rootfs
+    -- bash-4.0# su - root
+    -- root@meego-handset-sdk:~# 
+
+5. Run MeeGo simulator
+    -- root@meego-handset-sdk:~# startmeego
+    -- root@meego-handset-sdk:~# startmeego-debug-handset  #run in debug mode
+
+5.1 Run other MTF application in simulator from console
+    * this section need "startmeego" running
+    -- root@meego-handset-sdk:~# DISPLAY=:2 fennec	   #launch fennec browser in simulator  
+    -- root@meego-handset-sdk:~# DISPLAY=:2 meegovideo	   #launch video player in simulator  
+
+6. Install application by yum
+    -- root@meego-handset-sdk:~# which meegovideo  #get the meegovideo application's absolute path
+    -- root@meego-handset-sdk:~# rpm -qf /usr/bin/meegovideo #identify which package a file belongs
+    -- root@meego-handset-sdk:~# yum install meego-handset-video
+    -- root@meego-handset-sdk:~# yum install meego-handset-music
+    -- root@meego-handset-sdk:~# yum install meego-handset-people
+
+7. Download rpm source package
+    * need yumdownloader tools , it is in yum-utils package
+    -- root@meego-handset-sdk:~# yum install yum-utils
+    * enable src/debug-info repo in repo file
+    -- root@meego-handset-sdk:~# sed -i "s/enabled=0/enabled=1/" /etc/yum.repos.d/core.repo
+    -- root@meego-handset-sdk:~# sed -i "s/enabled=0/enabled=1/" /etc/yum.repos.d/handset.repo
+    -- root@meego-handset-sdk:~# sed -i "s/enabled=0/enabled=1/" /etc/yum.repos.d/non-oss.repo
+    * download the video player's src rpm
+    -- root@meego-handset-sdk:~# which meegovideo  #get the meegovideo application's absolute path
+    -- root@meego-handset-sdk:~# rpm -qf /usr/bin/meegovideo #identify which package a file belongs
+    -- root@meego-handset-sdk:~# yumdownloader --source meego-handset-video #download meego-handset-video-0.2.0-1.2.src.rpm
+
+7.1 uncompress the rpm package
+    -- root@meego-handset-sdk:~/download# rpm2cpio meego-handset-video-0.2.0-1.2.src.rpm |cpio -dui
+
+8. Build the sourcecode
+    * "rpm -ivh file.rpm" will install the src and spec to ~/rpmbuild/SPECS and ~/rpmbuild/SOURCES
+    -- root@meego-handset-sdk:~/download# rpm -ivh meego-handset-video-0.2.0-1.2.src.rpm 
+    -- root@meego-handset-sdk:~/download# cd ~/rpmbuild/
+    * "rpmbuild -ba" will build and create the rpm packages 
+    --root@meego-handset-sdk:~/rpmbuild# rpmbuild -ba SPECS/meego-handset-video.spec
+    * "rpmbuild -bp" will prepare the build env (unzip and patch)
+    --root@meego-handset-sdk:~/rpmbuild# rpmbuild -bp SPECS/meego-handset-video.spec
+
+9. Install rpm debug-info package
+    * after install the debug-info , you can easy trace the application stack
+    -- root@meego-handset-sdk:~# yum search meego-handset-video |grep debuginfo
+    -- root@meego-handset-sdk:~# yum install meego-handset-video-debuginfo
