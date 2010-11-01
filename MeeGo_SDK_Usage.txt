@@ -70,3 +70,10 @@
     * after install the debug-info , you can easy trace the application stack
     -- root@meego-handset-sdk:~# yum search meego-handset-video |grep debuginfo
     -- root@meego-handset-sdk:~# yum install meego-handset-video-debuginfo
+
+10. Code View
+    * vim + ctags
+   -- root@meego-handset-sdk:~/rpmbuild/BUILD/meego-handset-video-0.2.0# ctags -R
+    * in vim "Ctrl + ]" will jump to a tag defination
+   -- root@meego-handset-sdk:~/rpmbuild/BUILD/meego-handset-video-0.2.0# vim src/main.cpp 
+
