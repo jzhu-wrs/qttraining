@@ -71,7 +71,20 @@
     -- root@meego-handset-sdk:~# yum search meego-handset-video |grep debuginfo
     -- root@meego-handset-sdk:~# yum install meego-handset-video-debuginfo
 
-10. Code View
+10. Qt Build
+    -- root@meego-handset-sdk:~# qmake -project
+    -- root@meego-handset-sdk:~# qmake 
+    -- root@meego-handset-sdk:~# make 
+
+11. RPM Spec
+    -- root@meego-handset-sdk:/etc/yum.repos.d# wget http://repo.meego.com/MeeGo/tools/repos/meego/trunk/meego-tools.repo
+    -- root@meego-handset-sdk:~# yum install spectacle
+    * .yaml to .spec
+    * http://wiki.meego.com/Packaging
+    * http://wiki.meego.com/Packaging/Guidelines
+    * http://wiki.meego.com/Spectacle
+
+12. Code View
     * vim + ctags
    -- root@meego-handset-sdk:~/rpmbuild/BUILD/meego-handset-video-0.2.0# ctags -R
     * in vim "Ctrl + ]" will jump to a tag defination
