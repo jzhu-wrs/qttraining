@@ -1,0 +1,180 @@
+1. Official Document
+    http://doc.qt.nokia.com/4.7/qtquick.html
+    $QTDIR/demos/declarative
+    $QTDIR/examples/declarative
+
+2. "Hello World" and qmlviewer
+    /*    //tutorial1.qml
+    /*    import Qt 4.7
+    /*    
+    /*    Rectangle {
+    /*        id: page
+    /*        width: 500; height: 200
+    /*        color: "lightgray"
+    /*    
+    /*        Text {
+    /*            id: helloText
+    /*            text: "Hello world!"
+    /*            y: 30
+    /*            anchors.horizontalCenter: page.horizontalCenter
+    /*            font.pointSize: 24; font.bold: true
+    /*        }
+    /*    }
+
+$ qmlviewer tutorial1.qml
+helpdoc:   
+    http://doc.qt.nokia.com/4.7/qmlviewer.html
+* runtime Object
+* runtime.orientation in Settings
+
+3. Use qml in C++
+helpdoc:
+    http://doc.qt.nokia.com/4.7/qtbinding.html
+    http://doc.qt.nokia.com/4.7/qml-integration.html
+
+* Use QML as QGraphicsItem 
+    /*   //QDeclarativeItem inherits from QGraphicsItem
+    /*   QDeclarativeEngine *engine = new QDeclarativeEngine;
+    /*   QDeclarativeComponent component(engine, QUrl::fromLocalFile("main.qml"));
+    /*   QObject *myObject = component.create();
+    /*   QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(myObject);
+
+* Use QML as QGraphicsView 
+    /*   //QDeclarativeView inherits from QGraphicsView
+    /*	QDeclarativeView *view = new QDeclarativeView;
+    /*	view->setSource(QUrl::fromLocalFile("main.qml"));
+
+* Modify the .pro project file
+    /* TEMPLATE += app
+    /* QT += gui declarative
+    /* SOURCES += main.cpp
+
+4. QML's core class
+    QDeclarativeEngine 
+    QDeclarativeComponent  // refer to a qml file
+    QDeclarativeContext	   // you can think it as a DOM
+
+    /*	#include <QApplication>
+    /*	#include <QDeclarativeEngine>
+    /*	#include <QDeclarativeContext>
+    /*	#include <QDeclarativeComponent>
+    /*	
+    /*	int main(int argc, char *argv[])
+    /*	{
+    /*	    QApplication app(argc, argv);
+    /*	
+    /*	    QDeclarativeEngine engine;
+    /*	    QDeclarativeContext *objectContext = new QDeclarativeContext(engine.rootContext());
+    /*	
+    /*	    QDeclarativeComponent component(&engine, "application.qml");
+    /*	    QObject *object = component.create(objectContext);
+    /*	
+****/*	    // ... delete object and objectContext when necessary
+    /*	
+    /*	    return app.exec();
+    /*	}
+
+
+
+    /*	#include <QApplication>
+    /*	#include <QDeclarativeView>
+    /*	#include <QDeclarativeContext>
+    /*	
+    /*	int main(int argc, char *argv[])
+    /*	{
+    /*	    QApplication app(argc, argv);
+    /*	
+    /*	    QDeclarativeView view;
+    /*	    QDeclarativeContext *context = view.rootContext();
+    /*	    context->setContextProperty("backgroundColor",
+    /*	                                QColor(Qt::yellow));
+    /*	
+    /*	    view.setSource(QUrl::fromLocalFile("main.qml"));
+    /*	    view.show();
+    /*	
+    /*	    return app.exec();
+    /*	}
+
+    /*	//main.qml
+    /*	import QtQuick 1.0
+    /*	
+    /*	Rectangle {
+    /*	    width: 300
+    /*	    height: 300
+    /*	
+    /*	    color: backgroundColor
+    /*	
+    /*	    Text {
+    /*	        anchors.centerIn: parent
+    /*	        text: "Hello Yellow World!"
+    /*	    }
+    /*	}
+
+
+5. Tutorial: Writing QML extensions with C++
+dochelp:
+   http://doc.qt.nokia.com/4.7/qml-extending-tutorial-index.html 
+
+-1.define a QDeclarativeItem
+-2.register(export) a QDeclarativeItem type with qmlRegisterType
+-3.use the export item in .qml file
+
+    /*	//define a QDeclarativeItem
+    /*	#include <QDeclarativeItem>
+    /*	#include <QColor>
+    /*	
+    /*	class PieChart : public QDeclarativeItem
+    /*	{
+    /*	    Q_OBJECT
+    /*	    Q_PROPERTY(QString name READ name WRITE setName)
+    /*	    Q_PROPERTY(QColor color READ color WRITE setColor)
+
+    /*	//register(export) a QDeclarativeItem type with qmlRegisterType
+    /*	#include "piechart.h"
+    /*	#include <qdeclarative.h>
+    /*	#include <QDeclarativeView>
+    /*	#include <QApplication>
+    /*	
+    /*	int main(int argc, char *argv[])
+    /*	{
+    /*	    QApplication app(argc, argv);
+    /*	
+    /*	    qmlRegisterType<PieChart>("Charts", 1, 0, "PieChart");
+    /*	
+    /*	    QDeclarativeView view;
+    /*	    view.setSource(QUrl::fromLocalFile("app.qml"));
+    /*	    view.show();
+    /*	    return app.exec();
+    /*	}
+
+    /*	//use the export item in .qml file
+    /*	import Charts 1.0
+    /*	import QtQuick 1.0
+    /*	
+    /*	Item {
+    /*	    width: 300; height: 200
+    /*	
+    /*	    PieChart {
+    /*	        id: aPieChart
+    /*	        anchors.centerIn: parent
+    /*	        width: 100; height: 100
+    /*	        name: "A simple pie chart"
+    /*	        color: "red"
+    /*	    }
+    /*	
+    /*	    Text {
+    /*	        anchors { bottom: parent.bottom; horizontalCenter: parent.horizontalCenter; bottomMargin: 20 }
+    /*	        text: aPieChart.name
+    /*	    }
+    /*	}
+    
+6. import module 
+dochelp:
+    http://doc.qt.nokia.com/4.7/qdeclarativemodules.html#qml-modules
+    http://doc.qt.nokia.com/4.7/qdeclarativeextensionplugin.html
+
+7. declarative item
+dochelp:
+    http://doc.qt.nokia.com/4.7/qdeclarativeelements.html
+
+7. property/animation/
