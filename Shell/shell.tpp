@@ -298,6 +298,40 @@ b
 ./para.sh
 --endshelloutput
 
+--newpage Internationalization and Localization
+--heading i18n/l10n
+--center locale relative environment 
+--beginoutput
+LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_TIME
+LC_ALL # if LC_ALL set, other LC_xxx will be override
+LANG   # if LC_xxx is not set, LANG will set the default value
+--endoutput
+--center locale setting file
+--beginoutput
+/etc/sysconfig/i18n
+~/.i18n
+--endoutput
+--center supported l10n in system
+--beginshelloutput
+$ locale -a
+--endshelloutput
+
+--newpage Internationalization and Localization(Cont.)
+--heading i18n/l10n(Cont.)
+--center language package name
+--beginoutput
+languange-pack-zh
+languange-pack-fr
+languange-pack-en
+...
+--endoutput
+--center example of using l10n
+--beginshelloutput
+$ LANG=zh_CN.UTF-8 date
+2011年 06月 05日 星期日 20:49:49 CST
+$ LC_ALL=zh_CN.UTF-8 ls --help
+--endshelloutput
+
 --newpage end
 --sethugefont block 
 --huge Thank You !
