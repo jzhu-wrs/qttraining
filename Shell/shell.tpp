@@ -242,6 +242,62 @@ read password </dev/tty
 stty echo
 --endoutput
 
+--newpage Shell script's positional parameters
+--heading Shell script's positional parameters
+--beginslideleft
+$1 means argv[1], $2 means argv[2] ...
+--endslideleft
+---
+--beginslideleft
+argv[10] is $10 ? answer is $(10) 
+--endslideleft
+---
+--beginslideleft
+$@ means the parameters list
+--endslideleft
+---
+--beginslideleft
+$# means argc, parameter count
+--endslideleft
+---
+--center Example of para.sh
+--beginoutput
+#! /usr/bin/sh
+echo $@
+echo $#
+echo $2
+echo $0
+--endoutput
+
+--newpage Execution tracing in Shell
+--heading Execution tracing in Shell
+eanble tracing for shell
+--beginshelloutput
+$ set -x 
+--endshelloutput
+disable tracing for shell 
+--beginshelloutput
+$ set +x 
+--endshelloutput
+run a shell with tracing enable
+--beginshelloutput
+$ sh -x ./para.sh  a b c d
+--endshelloutput
+
+--newpage Execution tracing in Shell(Cont.)
+--heading Execution tracing in Shell(Cont.)
+--beginshelloutput
+$ sh -x ./para.sh  a b c d
++ echo a b c d
+a b c d
++ echo 4
+4
++ echo b
+b
++ echo ./para.sh
+./para.sh
+--endshelloutput
+
 --newpage end
 --sethugefont block 
 --huge Thank You !
