@@ -194,6 +194,54 @@ $ echo $PATH
 $ env
 --endshelloutput
 
+--newpage I/O Redirection
+--heading I/O Redirection
+default standard input (fd:0)
+default standard output (fd:1)
+default standard error  (fd:2)
+--center Change the default input with "<"
+--beginshelloutput
+$ patch -p1 <patchfile
+--endshelloutput
+--center Change the default input with ">" or ">>"
+--beginshelloutput
+$ find . -name "*.cpp" >find.result
+$ find . -name "*.[ch]" >>find.result #>> append output to the file
+--endshelloutput
+You can take "<" or ">" as funnels, which indicate data direction
+
+--newpage I/O Redirection(Cont.)
+--heading I/O Redirection(Cont.)
+--center Change the default error with ">" or ">>"
+--beginshelloutput
+$ find /usr/share/ -name "*.py" 2>find.result
+$ find . -name "*.sh" 2>&1 >find.result # &1 means default output
+--endshelloutput
+--center Pipeline "|" used in shell
+data transfer from one process to another process
+--beginshelloutput
+$ cat namelist.txt | sort | uniq
+--endshelloutput
+
+--newpage I/O Redirection Special File
+--heading I/O Redirection Special File
+--center file /dev/null
+the data written to /dev/null are abandoned
+--beginoutput
+if grep QApplication main.cpp  >/dev/null
+then
+...
+else
+...
+fi
+--endoutput
+--center file /dev/tty connect to your working terminal
+--beginoutput
+stty -echo
+read password </dev/tty
+stty echo
+--endoutput
+
 --newpage end
 --sethugefont block 
 --huge Thank You !
